@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import NavBar from "~/components/NavBar";
 import { getServerAuthSession } from "~/server/auth";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import QueryProvider from "./queryProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,8 +37,10 @@ export default async function RootLayout({
           radius="full"
           appearance="light"
         >
-          <NavBar session={session ?? null} />
-          {children}
+          <QueryProvider>
+            <NavBar session={session ?? null} />
+            {children}
+          </QueryProvider>
         </Theme>
       </body>
     </html>

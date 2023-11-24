@@ -33,7 +33,7 @@ export default function NavBar({ session }: NavbarProps) {
   };
 
   return (
-    <Disclosure as="nav" className="bg-green-700">
+    <Disclosure as="nav" className="bg-white border-b border-gray-200">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -52,7 +52,7 @@ export default function NavBar({ session }: NavbarProps) {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo */}
-                  <BookOpenIcon className="h-6 w-6 text-blue-200" />
+                  <BookOpenIcon className="h-6 w-6 text-green-700" />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -62,8 +62,8 @@ export default function NavBar({ session }: NavbarProps) {
                         href={item.href}
                         className={classNames(
                           isCurrentPage(item.href) // Use isCurrentPage function here
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            ? "bg-gray-900 text-green-700"
+                            : "text-green-700 hover:bg-green-700 hover:text-white",
                           "rounded-md px-3 py-2 text-sm font-medium",
                         )}
                         aria-current={
@@ -93,7 +93,7 @@ export default function NavBar({ session }: NavbarProps) {
                   className={classNames(
                     isCurrentPage(item.href)
                       ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      : "text-green-300 hover:bg-gray-700 hover:text-white",
                     "block rounded-md px-3 py-2 text-base font-medium",
                   )}
                   aria-current={isCurrentPage(item.href) ? "page" : undefined}
