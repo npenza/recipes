@@ -26,7 +26,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`bg-[#f9f8f8] font-sans ${inter.variable}`}>
         <Theme
           accentColor="mint"
           grayColor="gray"

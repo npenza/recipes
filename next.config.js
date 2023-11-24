@@ -16,6 +16,10 @@ const config = {
             protocol: 'https',
             hostname: 'tailwindui.com',
           },
+          {
+            protocol: 'https',
+            hostname: 'assets.epicurious.com',
+          },
         ],
       },
 };

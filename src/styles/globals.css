@@ -5,9 +5,7 @@
 @import '@radix-ui/colors/black-alpha.css';
 @import '@radix-ui/colors/violet.css';
 
-
 /* User Avatar */
-
 .AvatarRoot {
   display: inline-flex;
   align-items: center;
