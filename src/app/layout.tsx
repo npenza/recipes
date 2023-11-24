@@ -4,6 +4,7 @@ import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import NavBar from "~/components/NavBar";
+import { getServerAuthSession } from "~/server/auth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,16 +17,25 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerAuthSession();
+
   return (
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
-        <Theme>
-          <NavBar />
+        <Theme
+          accentColor="mint"
+          grayColor="gray"
+          panelBackground="solid"
+          scaling="100%"
+          radius="full"
+          appearance="light"
+        >
+          <NavBar session={session ?? null} />
           {children}
         </Theme>
       </body>
