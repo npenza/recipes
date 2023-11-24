@@ -16,7 +16,11 @@ export async function GET() {
         email: session.user.email!,
       },
       include: {
-        recipes: true,
+        recipes : {
+          include : {
+            author: true
+          }
+        }
       },
     });
 

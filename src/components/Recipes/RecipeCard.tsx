@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RecipeCard({ recipe }: { recipe: Recipe }) {
   return (
-    <div className="mx-auto flex max-w-[18rem] flex-col rounded-md border border-gray-200 bg-white">
+    <Link href={`/recipe/${recipe.author.name}/${recipe.title}`} className="mx-auto flex max-w-[18rem] flex-col rounded-md border border-gray-200 bg-white">
       <Image
         alt={recipe.title}
         src={recipe.image ?? ""}
@@ -18,6 +19,6 @@ export default function RecipeCard({ recipe }: { recipe: Recipe }) {
           Healthy
         </span>
       </div>
-    </div>
+    </Link>
   );
 }
