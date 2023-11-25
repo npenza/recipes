@@ -5,8 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 import { getRecipe } from "~/hooks/getRecipe";
 import { Avatar, Heading, Skeleton } from "@chakra-ui/react";
 import Image from "next/image";
-import Editor from "../Editor";
 import axios from "axios";
+import dynamic from 'next/dynamic'
+
+// Import editor dynamically
+export const Editor = dynamic(() => import('../Editor'), {
+  ssr: false,
+})
 
 export function Recipe({
   username,
