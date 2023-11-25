@@ -4,7 +4,7 @@ import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";
 import NavBar from "~/components/NavBar";
 import { getServerAuthSession } from "~/server/auth";
-import QueryProvider from "./queryProvider";
+import QueryProvider from "./QueryProvider";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const inter = Inter({

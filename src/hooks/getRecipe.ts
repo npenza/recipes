@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 export const getRecipe = async (
   username: string,
@@ -11,9 +11,8 @@ export const getRecipe = async (
         slugTitle: recipeTitle,
       },
     });
-    console.log(response.data)
     return response.data;
-  } catch (error: AxiosError) {
-    return error;
+  } catch (error) {
+    throw error;
   }
 };

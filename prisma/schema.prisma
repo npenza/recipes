@@ -74,6 +74,7 @@ model Recipe {
   title    String
   slugTitle String
   image    String
+  recipeBlockContent  Json?
   author   User   @relation(fields: [authorId], references: [id])
   authorId String
 }

@@ -1,4 +1,4 @@
-import type { NextRequest } from "next/server";
+import type { NextRequest, NextResponse } from "next/server";
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
@@ -22,7 +22,6 @@ export async function GET(request: NextRequest) {
   });
 
   // TODO: Run check to see if recipe is private or if session user has access to the recipe
-
   const recipe = await db.recipe.findFirst({
     where: {
       authorId: authorOfRecipe?.id,
@@ -34,4 +33,13 @@ export async function GET(request: NextRequest) {
   });
 
   return Response.json({ ...recipe });
+}
+
+export async function POST(response: NextResponse, request: NextRequest) {
+
+  // const {message} = request.body.
+
+  console.log(request)
+
+  return Response.json({ Data: "Hello World" });
 }

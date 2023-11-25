@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getRecipe } from "~/hooks/getRecipe";
 import { Avatar, Heading, Skeleton } from "@chakra-ui/react";
 import Image from "next/image";
+import Editor from "../Editor";
 
 export function Recipe({
   username,
@@ -19,11 +20,20 @@ export function Recipe({
     queryFn: () => getRecipe(username, recipeTitle),
   });
 
+  // Initial Data
+  const [data, setData] = useState<JSON | null>(null);
+
+  // TODO: Handle DB updates
+  const handleUpdateRecipeInDb = async (data: JSON) => {
+    console.log(JSON.stringify(data));
+  };
+
   return (
     <div className="mx-auto mt-4 flex max-w-7xl flex-col items-center justify-center ">
       <Skeleton isLoaded={!isLoading}>
         <Image
-          src={recipe?.image}
+          src={recipe?.image ?? ""}
+          alt={recipe?.title ?? ""}
           className="h-72 rounded-md object-cover"
           width={800}
           height={200}
@@ -46,6 +56,22 @@ export function Recipe({
           </span>
         </div>
       </Skeleton>
+
+      {recipe && (
+        <div className="editor w-[100%] max-w-7xl bg-white">
+          <Editor
+            data={recipe?.recipeBlockContent}
+            onChange={setData}
+            editorblock="editorjs-container"
+          />
+          <button
+            className="savebtn"
+            onClick={() => handleUpdateRecipeInDb(data!)}
+          >
+            Save
+          </button>
+        </div>
+      )}
     </div>
   );
 }
