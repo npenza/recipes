@@ -6,6 +6,7 @@ import { getRecipe } from "~/hooks/getRecipe";
 import { Avatar, Heading, Skeleton } from "@chakra-ui/react";
 import Image from "next/image";
 import Editor from "../Editor";
+import axios from "axios";
 
 export function Recipe({
   username,
@@ -14,22 +15,34 @@ export function Recipe({
   username: string;
   recipeTitle: string;
 }) {
-  // Fetch recipes
+
+  // Fetch recipe
   const { data: recipe, isLoading } = useQuery({
     queryKey: [recipeTitle],
     queryFn: () => getRecipe(username, recipeTitle),
   });
 
-  // Initial Data
+  // Load inital data for recipe into editor. Save Updates here..
   const [data, setData] = useState<JSON | null>(null);
 
-  // TODO: Handle DB updates
+  // Update recipe content in database
   const handleUpdateRecipeInDb = async (data: JSON) => {
-    console.log(JSON.stringify(data));
+    if (data) {
+      const response = await axios.patch(
+        `/api/recipe/${username}/${recipeTitle}`,
+        {
+          recipeBlockContent: data,
+        },
+      );
+
+      // TODO: Show toast, handle success and error
+    }
   };
 
   return (
     <div className="mx-auto mt-4 flex max-w-7xl flex-col items-center justify-center ">
+
+      {/* Header Image */}
       <Skeleton isLoaded={!isLoading}>
         <Image
           src={recipe?.image ?? ""}
@@ -40,10 +53,12 @@ export function Recipe({
         />
       </Skeleton>
 
+      {/* Recipe Heading */}
       <Skeleton noOfLines={1} isLoaded={!isLoading}>
         <Heading className="mt-4">{recipe?.title ?? ""}</Heading>
       </Skeleton>
 
+      {/* Recipe Author Info */}
       <Skeleton noOfLines={1} isLoaded={!isLoading}>
         <div className="mt-2 flex flex-row items-center justify-center space-x-2">
           <Avatar
@@ -57,6 +72,7 @@ export function Recipe({
         </div>
       </Skeleton>
 
+      {/* Recipe Editor Content */}
       {recipe && (
         <div className="editor w-[100%] max-w-7xl bg-white">
           <Editor

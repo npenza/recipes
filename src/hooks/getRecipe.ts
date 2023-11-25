@@ -5,12 +5,7 @@ export const getRecipe = async (
   recipeTitle: string,
 ): Promise<Recipe> => {
   try {
-    const response = await axios.get<Recipe>("/api/recipe", {
-      params: {
-        username: username,
-        slugTitle: recipeTitle,
-      },
-    });
+    const response = await axios.get<Recipe>(`/api/recipe/${username}/${recipeTitle}`);
     return response.data;
   } catch (error) {
     throw error;
