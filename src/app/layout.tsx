@@ -2,11 +2,10 @@ import "~/styles/globals.css";
 import "@radix-ui/themes/styles.css";
 
 import { Inter } from "next/font/google";
-import { Theme } from "@radix-ui/themes";
 import NavBar from "~/components/NavBar";
 import { getServerAuthSession } from "~/server/auth";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import QueryProvider from "./queryProvider";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,19 +28,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-[#f9f8f8] font-sans ${inter.variable}`}>
-        <Theme
-          accentColor="mint"
-          grayColor="gray"
-          panelBackground="solid"
-          scaling="100%"
-          radius="full"
-          appearance="light"
-        >
+        <ChakraProvider>
           <QueryProvider>
             <NavBar session={session ?? null} />
             {children}
           </QueryProvider>
-        </Theme>
+        </ChakraProvider>
       </body>
     </html>
   );
