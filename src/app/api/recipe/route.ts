@@ -10,26 +10,28 @@ export async function GET(request: NextRequest) {
     return Response.json({ error: "Not logged in" });
   }
 
-  //   Get params
+  // Get params
   const url = request.nextUrl;
-  const username =  url.searchParams.get("username");
-  const title =  url.searchParams.get("title");
+  const username = url.searchParams.get("username");
+  const slugTitle = url.searchParams.get("slugTitle");
 
   const authorOfRecipe = await db.user.findFirst({
-    where : {
-        name: username
-    }
-  })
+    where: {
+      name: username,
+    },
+  });
+
+  // TODO: Run check to see if recipe is private or if session user has access to the recipe
 
   const recipe = await db.recipe.findFirst({
-    where : {
-        authorId: authorOfRecipe?.id,
-        title: title
+    where: {
+      authorId: authorOfRecipe?.id,
+      slugTitle: slugTitle!,
     },
-    include : {
-      author: true
-    }
-  })
+    include: {
+      author: true,
+    },
+  });
 
   return Response.json({ ...recipe });
 }

@@ -8,7 +8,7 @@ export const getRecipe = async (
     const response = await axios.get<Recipe>("/api/recipe", {
       params: {
         username: username,
-        title: recipeTitle,
+        slugTitle: recipeTitle,
       },
     });
     console.log(response.data)

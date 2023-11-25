@@ -1,6 +1,7 @@
 type Recipe = {
     id : string;
     title: string;
+    slugTitle: string;
     image: string;
     author: User;
     authorId: string;
